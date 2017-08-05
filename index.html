@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/p5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/addons/p5.dom.min.js"></script>
+  <title>Deeplearn js demo</title>
+  <style>
+  *{
+    margin:0px;
+    padding:0px;
+    font-family: Helvetica, Arial,sans-serif;
+  }
+  button{
+    margin: 0 10px;
+    border: 2px solid black;
+    padding: 4px;
+    background:white;
+  }
+  #canvas{
+    text-align: center;
+  }
+  #buttons{
+    text-align: center;
+    margin: 20px;
+  }
+  #results{
+    text-align: center;
+    margin: 20px;
+  }
+  </style>
+</head>
+
+<body>
+  <div id="buttons">
+    <button type="button" onclick="showRandomNumber();">Random Number</button>
+    <button type="button" onclick="getNumber();">Recognize</button>
+    <button type="button" onclick="clearCanvas();">Clear</button>
+  </div>
+
+  <div id="canvas"></div>
+  <div id="results">
+      <h4 id="result"><h4>
+  </div>
+  <script src="deeplearn.js"></script>
+  <script src="sketch.js"></script>
+</body>
+
+</html>
