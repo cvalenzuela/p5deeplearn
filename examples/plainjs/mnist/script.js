@@ -23,6 +23,7 @@ var drawing = false;
 function setup() {
   // Create DOM elements
   var canvas = createCanvas(280, 280);
+  pixelDensity(1);
   canvas.mousePressed(startDrawing);
   canvas.mouseReleased(stopDrawing);
   resultP = createP(' ');
@@ -51,7 +52,7 @@ function draw() {
   // If you are drawing
   if (drawing) {
     stroke(255);
-    strokeWeight(16);
+    strokeWeight(10);
     line(pmouseX, pmouseY, mouseX, mouseY);
   }
 }
@@ -66,8 +67,8 @@ function classify() {
   img.copy(get(), 0, 0, width, height, 0, 0, 28, 28);
   img.get()
   pixels = Array.prototype.slice.call(img.pixels);
-
-  for (var i = 0; i <= 783; i++) {
+  console.log(img.pixels)
+  for (var i = 0; i < 784; i++) {
     var value = pixels.slice(0, 3).reduce(function(sum, current) {
       return sum + current
     }) / 3
@@ -75,9 +76,8 @@ function classify() {
     pixels.splice(0, 4)
   }
   console.log(gray)
-  next = true
-
-  //predict(gray)
+  predict(gray)
+  next = true;  
 }
 
 function predict(data) {
