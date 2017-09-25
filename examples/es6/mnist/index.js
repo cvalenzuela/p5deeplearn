@@ -21,7 +21,7 @@ let result, submit, drawing = false,
 let sketch = new p5((p) => {
 
   p.setup = () => {
-    let canvas = p.createCanvas(280, 280);
+    let canvas = p.createCanvas(200, 200);
     p.pixelDensity(1);
     canvas.mousePressed(startDrawing);
     canvas.mouseReleased(stopDrawing);
@@ -33,8 +33,8 @@ let sketch = new p5((p) => {
 
   p.draw = () => {
     if (drawing) {
-      p.stroke(235);
-      p.strokeWeight(30);
+      p.stroke(245);
+      p.strokeWeight(20);
       p.line(p.pmouseX, p.pmouseY, p.mouseX, p.mouseY);
     }
   };

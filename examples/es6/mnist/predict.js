@@ -4,12 +4,12 @@ Predict a drawn number.
 
 import { CheckpointLoader, NDArrayMathGPU, Session, Graph, Array1D } from 'deeplearn';
 
-let math, graphModel, input, probs, session;
-
+const math = new NDArrayMathGPU();
 let reader = new CheckpointLoader('model/');
+let input, probs, session;
+
 reader.getAllVariables().then((checkpoints) => {
-  math = new NDArrayMathGPU();
-  graphModel = buildModelGraph(checkpoints);
+  let graphModel = buildModelGraph(checkpoints);
   input = graphModel[0];
   probs = graphModel[1];
   session = new Session(input.node.graph, math);
