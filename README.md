@@ -7,5 +7,5 @@ Most of the examples are ports of Daniel Shiffman [Nature of Code Intelligence a
 The `/examples` folder contains ES6 and plain js files.
 
 ### Demos
-- [Mnist](https://cvalenzuela.github.io/p5deeplearn/examples/plainjs/mnist/index.html)
-- [CNN](https://cvalenzuela.github.io/p5deeplearn/examples/plainjs/cnn/index.html)
+- [Mnist](https://cvalenzuela.github.io/p5deeplearn/examples/es6/mnist/dist/index.html)
+- [RNN/LSTM](https://cvalenzuela.github.io/p5deeplearn/examples/es6/rnn/dist/index.html)

@@ -13,7 +13,7 @@ https://github.com/cvalenzuela/p5deeplearn
 
 import p5 from 'p5';
 import 'p5/lib/addons/p5.dom';
-import { predict, test } from './wrapper';
+// import { predict } from './wrapper';
 
 let result, submit, drawing = false,
   next = false;

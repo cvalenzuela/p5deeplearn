@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "watch:mnist": "watchify mnist/index.js --outfile mnist/dist/bundle.js -t [ babelify --presets [ es2015 ] ]",
-    "build:mnist": "browserify mnist/index.js --outfile mnist/dist/bundle.js -t [ babelify --presets [ es2015 ] ]",
+    "build:mnist": "browserify mnist/index.js -t [ babelify --presets [ es2015 ] ] | uglifyjs -c > mnist/dist/bundle.js",
+    "watch:rnn": "watchify rnn/index.js --outfile rnn/dist/bundle.js -t [ babelify --presets [ es2015 ] ]",
+    "build:rnn": "browserify rnn/index.js -t [ babelify --presets [ es2015 ] ] | uglifyjs -c > rnn/dist/bundle.js",
     "build:all": ""
   },
   "repository": {
@@ -27,6 +29,7 @@
     "babelify": "7.3.0",
     "browserify": "14.4.0",
     "live-server": "1.2.0",
+    "uglifyify": "4.0.4",
     "watchify": "3.9.0"
   }
 }
