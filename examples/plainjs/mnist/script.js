@@ -11,9 +11,6 @@ https://github.com/cvalenzuela/p5deeplearn
 ===
 */
 
-var reader = new deeplearn.CheckpointLoader('.');
-var data, math, _a, sess, input, probs;
-
 var submit; // Submit button
 var resultP; // Show results
 
@@ -51,64 +48,33 @@ function stopDrawing() {
 function draw() {
   // If you are drawing
   if (drawing) {
-    stroke(255);
-    strokeWeight(10);
+    stroke(235);
+    strokeWeight(30);
     line(pmouseX, pmouseY, mouseX, mouseY);
   }
 }
 
 // Run the classification
 function classify() {
-  // Get all the pixels!
   var img = createImage(28, 28);
   var gray = [];
-  var pixels = [];
 
   img.copy(get(), 0, 0, width, height, 0, 0, 28, 28);
-  img.get()
-  pixels = Array.prototype.slice.call(img.pixels);
-  console.log(img.pixels)
+  img.loadPixels();
+  var imgPixels = Array.prototype.slice.call(img.pixels);
+
   for (var i = 0; i < 784; i++) {
-    var value = pixels.slice(0, 3).reduce(function(sum, current) {
+    var value = imgPixels.slice(0, 3).reduce(function(sum, current) {
       return sum + current
     }) / 3
-    gray.push(float(norm(value, 0, 255).toFixed(2)))
-    pixels.splice(0, 4)
+    gray.push(float(norm(value, 0, 255).toFixed(3)))
+    imgPixels.splice(0, 4)
   }
-  console.log(gray)
-  predict(gray)
   next = true;  
-}
+  
+  predict(gray);  
 
-function predict(data) {
-  reader.getAllVariables().then(function(vars) {
-    math = new deeplearn.NDArrayMathGPU();
-    _a = buildModelGraphAPI(data, vars);
-    input = _a[0];
-    probs = _a[1];
-    sess = new deeplearn.Session(input.node.graph, math);
+  // Debug: Draw the greyscale 28x28 image in the corner
+  //copy(img.get(),0,0,28,28,0,0,28,28)  
 
-    math.scope(function() {
-      var inputData = deeplearn.Array1D.new(data);
-      var probsVal = sess.eval(probs, [{ tensor: input, data: inputData }]);
-      console.log('Prediction: ' + probsVal.get());
-      resultP.html(probsVal.get());
-    });
-  });
-};
-
-
-function buildModelGraphAPI(data, vars) {
-  var g = new deeplearn.Graph();
-  var input = g.placeholder('input', [784]);
-  var hidden1W = g.constant(vars['hidden1/weights']);
-  var hidden1B = g.constant(vars['hidden1/biases']);
-  var hidden1 = g.relu(g.add(g.matmul(input, hidden1W), hidden1B));
-  var hidden2W = g.constant(vars['hidden2/weights']);
-  var hidden2B = g.constant(vars['hidden2/biases']);
-  var hidden2 = g.relu(g.add(g.matmul(hidden1, hidden2W), hidden2B));
-  var softmaxW = g.constant(vars['softmax_linear/weights']);
-  var softmaxB = g.constant(vars['softmax_linear/biases']);
-  var logits = g.add(g.matmul(hidden2, softmaxW), softmaxB);
-  return [input, g.argmax(logits)];
 }
