@@ -1,7 +1,7 @@
 /*
 ===
 Mnist Demo
-p5 and deeplearn.js
+deeplearn.js meets p5
 
 This is a port of Daniel Shiffman Nature of Code: Intelligence and Learning
 Original Repo: https://github.com/shiffman/NOC-S17-2-Intelligence-Learning

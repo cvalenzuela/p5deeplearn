@@ -1,6 +1,11 @@
-# p5 meets deeplearn.js
+# Deeplearn.js meets p5
 
-Quick and dirty examples of [deeplearn.js](https://github.com/PAIR-code/deeplearnjs) with [p5.js](https://github.com/processing/p5.js).
+Interactive experiments using [deeplearn.js](https://github.com/PAIR-code/deeplearnjs) and [p5.js](https://github.com/processing/p5.js).
 
+Most of the examples are ports of Daniel Shiffman [Nature of Code Intelligence and Learning examples](https://github.com/shiffman/NOC-S17-2-Intelligence-Learning).
 
-- [Mnist Demo](https://cvalenzuela.github.io/p5deeplearn/examples/plainjs/mnist/index.html)
+The `/examples` folder contains ES6 and plain js files.
+
+### Demos
+- [Mnist](https://cvalenzuela.github.io/p5deeplearn/examples/plainjs/mnist/index.html)
+- [CNN](https://cvalenzuela.github.io/p5deeplearn/examples/plainjs/cnn/index.html)
