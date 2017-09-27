@@ -2,10 +2,21 @@
 LSTM/RNN Generator
 */
 
-import { Array3D, NDArrayMathGPU, CheckpointLoader, Session } from 'deeplearn';
+import { Array3D, NDArrayMathGPU, CheckpointLoader, Session, Graph } from 'deeplearn';
 import { hamlet } from './hamlet';
 
-let math, _a;
+let input, probs, session;
+
+const math = new NDArrayMathGPU();
+
+let reader = new CheckpointLoader('model/');
+reader.getAllVariables().then((checkpoints) => {
+  let graphModel = buildModelGraph(checkpoints);
+  // input = graphModel[0];
+  // probs = graphModel[1];
+  // console.log(input)
+  // session = new Session(input.node.graph, math);
+});
 
 let getRandomInt = (min, max) => {
   min = Math.ceil(min);
@@ -31,29 +42,23 @@ let generated = '';
 let sentence = text.substring(start_index, start_index + maxlen);
 generated += sentence;
 
-let reader = new CheckpointLoader('.');
+let buildModelGraph = (checkpoints) => {
+  console.log('here')
+  // let g = new Graph();
+  // let input = g.placeholder('input', [784]);
+  // let hidden1W = g.constant(checkpoints['hidden1/weights']);
+  // let hidden1B = g.constant(checkpoints['hidden1/biases']);
+  // let hidden1 = g.relu(g.add(g.matmul(input, hidden1W), hidden1B));
+  // let hidden2W = g.constant(checkpoints['hidden2/weights']);
+  // let hidden2B = g.constant(checkpoints['hidden2/biases']);
+  // let hidden2 = g.relu(g.add(g.matmul(hidden1, hidden2W), hidden2B));
+  // let softmaxW = g.constant(checkpoints['softmax_linear/weights']);
+  // let softmaxB = g.constant(checkpoints['softmax_linear/biases']);
+  // let logits = g.add(g.matmul(hidden2, softmaxW), softmaxB);
+  // return [input, g.argmax(logits)];
+};
 
-reader.getAllVariables().then((vars) => {
-  math = new NDArrayMathGPU();
-  _a = buildModelGraphAPI(data, vars);
-
-  input = _a[0];
-  probs = _a[1];
-  sess = new Session(input.node.graph, math);
-
-  math.scope(() => {
-    let inputData = track(Array1D.new(data));
-    let probsVal = sess.eval(probs, [{
-      tensor: input,
-      data: inputData
-    }]);
-    console.log('Prediction: ' + probsVal.get());
-    resultTag.html('Prediction: ' + probsVal.get());
-    sess.dispose();
-  });
-});
-
-let lstm = () =>  {
+let generateText = () =>  {
   for (let i = 0; i < 50; i++) {
     let x = Array3D.zeros([1, maxlen, chars.length]);
     Array.from(sentence).forEach((char, i) => {
@@ -66,6 +71,4 @@ let lstm = () =>  {
   }
 }
 
-lstm();
-
-export { lstm }
+export { generateText }

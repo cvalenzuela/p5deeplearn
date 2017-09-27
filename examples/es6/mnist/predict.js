@@ -4,10 +4,11 @@ Predict a drawn number.
 
 import { CheckpointLoader, NDArrayMathGPU, Session, Graph, Array1D } from 'deeplearn';
 
-const math = new NDArrayMathGPU();
-let reader = new CheckpointLoader('model/');
 let input, probs, session;
 
+const math = new NDArrayMathGPU();
+
+let reader = new CheckpointLoader('model/');
 reader.getAllVariables().then((checkpoints) => {
   let graphModel = buildModelGraph(checkpoints);
   input = graphModel[0];
