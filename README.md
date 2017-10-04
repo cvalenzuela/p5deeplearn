@@ -1,4 +1,6 @@
-# Deeplearn.js meets p5
+## Deeplearn.js meets p5
+
+# This project has moved to a new repository [here](https://github.com/ITPNYU/p5-deeplearn-js)
 
 Interactive experiments using [deeplearn.js](https://github.com/PAIR-code/deeplearnjs) and [p5.js](https://github.com/processing/p5.js).
 
